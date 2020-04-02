@@ -8,17 +8,38 @@ def makeCardDeck(cardList):
     deck.append(cardList * 16) # adding four decks to the dealer deck
     return deck
 
-def blackjack(deck):
+def blackjack(deck, money):
     
     playAgain = False
 
+    getBet(money)
+
     return playAgain
+
+def getBet(money):
+
+    try:
+        print('Current balance:', money) # informs player how much money they have to bet
+        bet = input('How much would you like to wager?') # gets player bet
+        if not type(bet) is int:
+            raise TypeError # maybe this isn't the best error to raise? who knows.
+        if bet > money:
+            raise Exception # catch this mistake too please
+    except TypeError: # input was not a number
+        print('Error: Invalid Input.')
+        bet = getBet(money)
+    except Exception: # bet was higher than money available, or something else is broken
+        print('Error: Bet is higher than money available.')
+        bet = getBet(money)
+
+    return bet
 
 def main():
 
     # Variables needed for game
 
     continueGame = True
+    money = 10000
 
     # Card Dictionary
 
@@ -46,7 +67,7 @@ def main():
 
     # Game loop
     while continueGame == True:
-        continueGame = blackjack(deck)
+        continueGame = blackjack(deck, money)
 
     print('Thanks for playing Blackjack!')
 
