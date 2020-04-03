@@ -10,9 +10,11 @@ def makeCardDeck(cardList):
 
 def blackjack(deck, money):
     
-    playAgain = False
-
-    getBet(money)
+    playAgain = False # won't play game again unless otherwise specified later
+    while money > 0:
+        bet = getBet(money) # gets player bet for round
+        dealtCards = deal(deck)
+        displayHand(dealtCards)
 
     return playAgain
 
@@ -33,6 +35,19 @@ def getBet(money):
         bet = getBet(money)
 
     return bet
+
+def deal(deck):
+    
+    dealtCards = []
+    dealtCards.append('P1') # player first card
+    dealtCards.append('DH') # dealer hidden card
+    dealtCards.append('P2') # player second card
+    dealtCards.append('DV') # dealer visible card
+
+    return dealtCards
+
+def displayHand(dealtCards):
+    pass
 
 def main():
 
